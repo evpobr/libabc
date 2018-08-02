@@ -91,3 +91,5 @@ install(
     NAMESPACE ABC::
     DESTINATION ${CMAKE_INSTALL_PACKAGEDIR}
 )
+
+include(CPack)
