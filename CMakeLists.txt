@@ -38,6 +38,7 @@ target_include_directories(ABC
 )
 target_compile_definitions(ABC
     PRIVATE
+        $<$<BOOL:${ENABLE_LOGGING}>:ENABLE_LOGGING>
         $<$<BOOL:${HAVE_UNISTD_H}>:HAVE_UNISTD_H>
         $<$<BOOL:${HAVE_IO_H}>:HAVE_IO_H>
         $<$<BOOL:${HAVE_SYSLOG_H}>:HAVE_SYSLOG_H>
