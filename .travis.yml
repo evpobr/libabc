@@ -1,0 +1,7 @@
+dist: travis_latest
+group: edge
+sudo: false
+language: c
+os: linux
+script:
+  - mkdir build && (cd build && cmake ..  && cmake --build .)
