@@ -21,7 +21,11 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <errno.h>
+#if defined(HAVE_UNISTD_H)
 #include <unistd.h>
+#elif defined HAVE_IO_H
+#include <io.h>
+#endif
 
 #include <abc/libabc.h>
 

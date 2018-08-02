@@ -3,10 +3,14 @@ cmake_minimum_required(VERSION 3.8)
 project(ABC VERSION 4)
 
 include(GNUInstallDirs)
+include(CheckIncludeFile)
 include(CheckSymbolExists)
 include(CheckFunctionExists)
 include(GenerateExportHeader)
 include(CTest)
+
+check_include_file(unistd.h HAVE_UNISTD_H)
+check_include_file(io.h HAVE_IO_H)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 
@@ -30,6 +34,8 @@ target_include_directories(ABC
 )
 target_compile_definitions(ABC
     PRIVATE
+        $<$<BOOL:${HAVE_UNISTD_H}>:HAVE_UNISTD_H>
+        $<$<BOOL:${HAVE_IO_H}>:HAVE_IO_H>
         $<$<BOOL:${HAVE_SECURE_GETENV}>:HAVE_SECURE_GETENV>
         $<$<BOOL:${HAVE_SECURE___GETENV}>:HAVE_SECURE___GETENV>
         $<$<BOOL:${_GNU_SOURCE}>:_GNU_SOURCE>
@@ -44,6 +50,11 @@ set_target_properties(ABC PROPERTIES
 if(BUILD_TESTING)
     add_executable(test-libabc src/test-libabc.c)
     target_link_libraries(test-libabc PRIVATE ABC)
-    target_compile_definitions(test-libabc PRIVATE "VERSION=\"${PROJECT_VERSION}\"")
+    target_compile_definitions(test-libabc
+        PRIVATE
+            $<$<BOOL:${HAVE_UNISTD_H}>:HAVE_UNISTD_H>
+            $<$<BOOL:${HAVE_IO_H}>:HAVE_IO_H>
+            "VERSION=\"${PROJECT_VERSION}\""
+    )
     add_test(NAME test-libabc COMMAND $<TARGET_FILE:test-libabc>)
 endif()
