@@ -45,7 +45,7 @@ set_target_properties(ABC PROPERTIES
 )
 
 if(BUILD_TESTING)
-    add_executable(test-libabc)
+    add_executable(test-libabc src/test-libabc.c)
     target_link_libraries(test-libabc PRIVATE ABC)
     add_test(NAME test-libabc COMMAND $<TARGET_FILE:test-libabc>)
 endif()
