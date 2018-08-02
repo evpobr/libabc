@@ -13,7 +13,6 @@ endif()
 
 add_library(ABC
     src/abc/libabc.h
-    ${CMAKE_CURRENT_BINARY_DIR}/config.h
     src/libabc-private.h
     src/libabc.c
 )
@@ -21,7 +20,6 @@ target_compile_features(ABC PRIVATE c_std_11)
 target_include_directories(ABC
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 target_compile_definitions(ABC
