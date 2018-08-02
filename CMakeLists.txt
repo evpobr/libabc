@@ -12,9 +12,6 @@ check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 
 check_function_exists(secure_getenv HAVE_SECURE_GETENV)
 check_function_exists(__secure_getenv HAVE___SECURE_GETENV)
-if(NOT (HAVE_SECURE_GETENV OR HAVE___SECURE_GETENV))
-    message(FATAL_ERROR "Neither secure_getenv nor __secure_getenv is available!")
-endif()
 
 add_library(ABC
     src/abc/libabc.h
