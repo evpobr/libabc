@@ -80,7 +80,7 @@ static void log_stderr(struct abc_ctx *ctx,
  *
  * Returns: stored userdata
  **/
-ABC_EXPORT void *abc_get_userdata(struct abc_ctx *ctx)
+void *abc_get_userdata(struct abc_ctx *ctx)
 {
         if (ctx == NULL)
                 return NULL;
@@ -94,7 +94,7 @@ ABC_EXPORT void *abc_get_userdata(struct abc_ctx *ctx)
  *
  * Store custom @userdata in the library context.
  **/
-ABC_EXPORT void abc_set_userdata(struct abc_ctx *ctx, void *userdata)
+void abc_set_userdata(struct abc_ctx *ctx, void *userdata)
 {
         if (ctx == NULL)
                 return;
@@ -129,7 +129,7 @@ static int log_priority(const char *priority)
  *
  * Returns: a new abc library context
  **/
-ABC_EXPORT int abc_new(struct abc_ctx **ctx)
+int abc_new(struct abc_ctx **ctx)
 {
         const char *env;
         struct abc_ctx *c;
@@ -161,7 +161,7 @@ ABC_EXPORT int abc_new(struct abc_ctx **ctx)
  *
  * Returns: the passed abc library context
  **/
-ABC_EXPORT struct abc_ctx *abc_ref(struct abc_ctx *ctx)
+struct abc_ctx * abc_ref(struct abc_ctx *ctx)
 {
         if (ctx == NULL)
                 return NULL;
@@ -176,7 +176,7 @@ ABC_EXPORT struct abc_ctx *abc_ref(struct abc_ctx *ctx)
  * Drop a reference of the abc library context.
  *
  **/
-ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx)
+struct abc_ctx *abc_unref(struct abc_ctx *ctx)
 {
         if (ctx == NULL)
                 return NULL;
@@ -198,11 +198,11 @@ ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx)
  * into the user's logging functionality.
  *
  **/
-ABC_EXPORT void abc_set_log_fn(struct abc_ctx *ctx,
-                              void (*log_fn)(struct abc_ctx *ctx,
-                                             int priority, const char *file,
-                                             int line, const char *fn,
-                                             const char *format, va_list args))
+void abc_set_log_fn(struct abc_ctx *ctx,
+                    void (*log_fn)(struct abc_ctx *ctx,
+                                   int priority, const char *file,
+                                   int line, const char *fn,
+                                   const char *format, va_list args))
 {
         ctx->log_fn = log_fn;
         info(ctx, "custom logging function %p registered\n", log_fn);
@@ -214,7 +214,7 @@ ABC_EXPORT void abc_set_log_fn(struct abc_ctx *ctx,
  *
  * Returns: the current logging priority
  **/
-ABC_EXPORT int abc_get_log_priority(struct abc_ctx *ctx)
+int abc_get_log_priority(struct abc_ctx *ctx)
 {
         return ctx->log_priority;
 }
@@ -227,7 +227,7 @@ ABC_EXPORT int abc_get_log_priority(struct abc_ctx *ctx)
  * Set the current logging priority. The value controls which messages
  * are logged.
  **/
-ABC_EXPORT void abc_set_log_priority(struct abc_ctx *ctx, int priority)
+void abc_set_log_priority(struct abc_ctx *ctx, int priority)
 {
         ctx->log_priority = priority;
 }
@@ -239,7 +239,7 @@ struct abc_thing {
         int refcount;
 };
 
-ABC_EXPORT struct abc_thing *abc_thing_ref(struct abc_thing *thing)
+struct abc_thing *abc_thing_ref(struct abc_thing *thing)
 {
         if (!thing)
                 return NULL;
@@ -247,7 +247,7 @@ ABC_EXPORT struct abc_thing *abc_thing_ref(struct abc_thing *thing)
         return thing;
 }
 
-ABC_EXPORT struct abc_thing *abc_thing_unref(struct abc_thing *thing)
+struct abc_thing *abc_thing_unref(struct abc_thing *thing)
 {
         if (thing == NULL)
                 return NULL;
@@ -260,12 +260,12 @@ ABC_EXPORT struct abc_thing *abc_thing_unref(struct abc_thing *thing)
         return NULL;
 }
 
-ABC_EXPORT struct abc_ctx *abc_thing_get_ctx(struct abc_thing *thing)
+struct abc_ctx *abc_thing_get_ctx(struct abc_thing *thing)
 {
         return thing->ctx;
 }
 
-ABC_EXPORT int abc_thing_new_from_string(struct abc_ctx *ctx, const char *string, struct abc_thing **thing)
+int abc_thing_new_from_string(struct abc_ctx *ctx, const char *string, struct abc_thing **thing)
 {
         struct abc_thing *t;
 
@@ -279,7 +279,7 @@ ABC_EXPORT int abc_thing_new_from_string(struct abc_ctx *ctx, const char *string
         return 0;
 }
 
-ABC_EXPORT struct abc_list_entry *abc_thing_get_some_list_entry(struct abc_thing *thing)
+struct abc_list_entry *abc_thing_get_some_list_entry(struct abc_thing *thing)
 {
         return NULL;
 }

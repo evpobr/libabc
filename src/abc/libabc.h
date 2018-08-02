@@ -32,17 +32,18 @@ extern "C" {
  * environment, user variables, allows custom logging
  */
 struct abc_ctx;
-struct abc_ctx *abc_ref(struct abc_ctx *ctx);
-struct abc_ctx *abc_unref(struct abc_ctx *ctx);
-int abc_new(struct abc_ctx **ctx);
-void abc_set_log_fn(struct abc_ctx *ctx,
-                  void (*log_fn)(struct abc_ctx *ctx,
-                                 int priority, const char *file, int line, const char *fn,
-                                 const char *format, va_list args));
-int abc_get_log_priority(struct abc_ctx *ctx);
-void abc_set_log_priority(struct abc_ctx *ctx, int priority);
-void *abc_get_userdata(struct abc_ctx *ctx);
-void abc_set_userdata(struct abc_ctx *ctx, void *userdata);
+ABC_EXPORT struct abc_ctx *abc_ref(struct abc_ctx *ctx);
+ABC_EXPORT struct abc_ctx *abc_unref(struct abc_ctx *ctx);
+ABC_EXPORT int abc_new(struct abc_ctx **ctx);
+ABC_EXPORT void abc_set_log_fn(struct abc_ctx *ctx,
+                               void (*log_fn)(struct abc_ctx *ctx,
+                                              int priority, const char *file,
+                                              int line, const char *fn,
+                                              const char *format, va_list args));
+ABC_EXPORT int abc_get_log_priority(struct abc_ctx *ctx);
+ABC_EXPORT void abc_set_log_priority(struct abc_ctx *ctx, int priority);
+ABC_EXPORT void *abc_get_userdata(struct abc_ctx *ctx);
+ABC_EXPORT void abc_set_userdata(struct abc_ctx *ctx, void *userdata);
 
 /*
  * abc_list
@@ -64,11 +65,13 @@ const char *abc_list_entry_get_value(struct abc_list_entry *list_entry);
  * access to things of abc
  */
 struct abc_thing;
-struct abc_thing *abc_thing_ref(struct abc_thing *thing);
-struct abc_thing *abc_thing_unref(struct abc_thing *thing);
-struct abc_ctx *abc_thing_get_ctx(struct abc_thing *thing);
-int abc_thing_new_from_string(struct abc_ctx *ctx, const char *string, struct abc_thing **thing);
-struct abc_list_entry *abc_thing_get_some_list_entry(struct abc_thing *thing);
+ABC_EXPORT struct abc_thing *abc_thing_ref(struct abc_thing *thing);
+ABC_EXPORT struct abc_thing *abc_thing_unref(struct abc_thing *thing);
+ABC_EXPORT struct abc_ctx *abc_thing_get_ctx(struct abc_thing *thing);
+ABC_EXPORT int abc_thing_new_from_string(struct abc_ctx *ctx,
+                                         const char *string,
+                                         struct abc_thing **thing);
+ABC_EXPORT struct abc_list_entry *abc_thing_get_some_list_entry(struct abc_thing *thing);
 
 #ifdef __cplusplus
 } /* extern "C" */
