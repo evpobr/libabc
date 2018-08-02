@@ -64,7 +64,7 @@ abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 #  ifdef HAVE___SECURE_GETENV
 #    define secure_getenv __secure_getenv
 #  else
-#    #define secure_getenv getenv
+#    define secure_getenv getenv
 #  endif
 #endif
 
