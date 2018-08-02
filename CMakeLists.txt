@@ -6,6 +6,7 @@ include(GNUInstallDirs)
 include(CheckSymbolExists)
 include(CheckFunctionExists)
 include(GenerateExportHeader)
+include(CTest)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 
@@ -42,3 +43,9 @@ set_target_properties(ABC PROPERTIES
     C_VISIBILITY_PRESET hidden
     OUTPUT_NAME abc
 )
+
+if(BUILD_TESTING)
+    add_executable(test-libabc)
+    target_link_libraries(test-libabc PRIVATE ABC)
+    add_test(NAME test-libabc COMMAND $<TARGET_FILE:test-libabc>)
+endif()
