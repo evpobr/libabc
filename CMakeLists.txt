@@ -11,8 +11,6 @@ if(NOT (HAVE_SECURE_GETENV OR HAVE___SECURE_GETENV))
     message(FATAL_ERROR "Neither secure_getenv nor __secure_getenv is available!")
 endif()
 
-configure_file(config.h.cmake config.h)
-
 add_library(ABC
     src/abc/libabc.h
     ${CMAKE_CURRENT_BINARY_DIR}/config.h
@@ -29,4 +27,6 @@ target_include_directories(ABC
 target_compile_definitions(ABC
     PRIVATE
         HAVE_CONFIG_H
+        $<$<BOOL:HAVE_SECURE_GETENV>:HAVE_SECURE_GETENV>
+        $<$<BOOL:HAVE_SECURE___GETENV>:HAVE_SECURE___GETENV>
 )
