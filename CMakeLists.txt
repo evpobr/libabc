@@ -7,7 +7,7 @@ include(CheckFunctionExists)
 
 check_function_exists(secure_getenv HAVE_SECURE_GETENV)
 check_function_exists(__secure_getenv HAVE___SECURE_GETENV)
-if(NOT ())
+if(NOT (HAVE_SECURE_GETENV OR HAVE___SECURE_GETENV))
     message(FATAL_ERROR "Neither secure_getenv nor __secure_getenv is available!")
 endif()
 
