@@ -53,8 +53,6 @@ abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 #  endif
 #endif
 
-#define ABC_EXPORT __attribute__ ((visibility("default")))
-
 void abc_log(struct abc_ctx *ctx,
            int priority, const char *file, int line, const char *fn,
            const char *format, ...)

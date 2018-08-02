@@ -19,6 +19,8 @@
 
 #include <stdarg.h>
 
+#include "abc_export.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

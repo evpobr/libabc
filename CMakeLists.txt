@@ -5,6 +5,7 @@ project(ABC VERSION 4)
 include(GNUInstallDirs)
 include(CheckSymbolExists)
 include(CheckFunctionExists)
+include(GenerateExportHeader)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 
@@ -19,10 +20,14 @@ add_library(ABC
     src/libabc-private.h
     src/libabc.c
 )
+
+generate_export_header(ABC)
+
 target_compile_features(ABC PRIVATE c_std_11)
 target_include_directories(ABC
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 target_compile_definitions(ABC
@@ -30,4 +35,9 @@ target_compile_definitions(ABC
         $<$<BOOL:${HAVE_SECURE_GETENV}>:HAVE_SECURE_GETENV>
         $<$<BOOL:${HAVE_SECURE___GETENV}>:HAVE_SECURE___GETENV>
         $<$<BOOL:${_GNU_SOURCE}>:_GNU_SOURCE>
+)
+set_target_properties(ABC PROPERTIES
+    VERSION 0.2.0
+    SOVERSION 0
+    C_VISIBILITY_PRESET hidden
 )
