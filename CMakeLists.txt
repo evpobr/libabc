@@ -7,7 +7,6 @@ include(CheckSymbolExists)
 include(CheckFunctionExists)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
-list(APPEND CMAKE_REQUIRED_DEFINITIONS $<$<BOOL:${_GNU_SOURCE}>:_GNU_SOURCE>)
 
 check_function_exists(secure_getenv HAVE_SECURE_GETENV)
 check_function_exists(__secure_getenv HAVE___SECURE_GETENV)
