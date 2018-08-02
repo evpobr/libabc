@@ -40,4 +40,5 @@ set_target_properties(ABC PROPERTIES
     VERSION 0.2.0
     SOVERSION 0
     C_VISIBILITY_PRESET hidden
+    OUTPUT_NAME abc
 )
