@@ -24,6 +24,6 @@ target_include_directories(ABC
 )
 target_compile_definitions(ABC
     PRIVATE
-        $<$<BOOL:HAVE_SECURE_GETENV>:HAVE_SECURE_GETENV>
-        $<$<BOOL:HAVE_SECURE___GETENV>:HAVE_SECURE___GETENV>
+        $<$<BOOL:${HAVE_SECURE_GETENV}>:HAVE_SECURE_GETENV>
+        $<$<BOOL:${HAVE_SECURE___GETENV}>:HAVE_SECURE___GETENV>
 )
