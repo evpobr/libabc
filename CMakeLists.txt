@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.8)
 project(ABC VERSION 4)
 
 include(GNUInstallDirs)
-include(CheckIncludeFile)
 include(CheckSymbolExists)
+include(CheckFunctionExists)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 list(APPEND CMAKE_REQUIRED_DEFINITIONS $<$<BOOL:${_GNU_SOURCE}>:_GNU_SOURCE>)
