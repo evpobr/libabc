@@ -72,6 +72,10 @@ abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 void abc_log(struct abc_ctx *ctx,
            int priority, const char *file, int line, const char *fn,
            const char *format, ...)
+#ifdef __GNUC__
            __attribute__((format(printf, 6, 7)));
+#else
+      ;
+#endif
 
 #endif
