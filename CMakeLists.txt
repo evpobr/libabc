@@ -47,5 +47,6 @@ set_target_properties(ABC PROPERTIES
 if(BUILD_TESTING)
     add_executable(test-libabc src/test-libabc.c)
     target_link_libraries(test-libabc PRIVATE ABC)
+    target_compile_definitions(test-libabc PRIVATE "VERSION=\"${PROJECT_VERSION}\"")
     add_test(NAME test-libabc COMMAND $<TARGET_FILE:test-libabc>)
 endif()
