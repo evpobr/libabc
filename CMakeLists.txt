@@ -92,4 +92,6 @@ install(
     DESTINATION ${CMAKE_INSTALL_PACKAGEDIR}
 )
 
+set(CPACK_VERSION ${PROJECT_VERSION})
+
 include(CPack)
