@@ -7,15 +7,19 @@ include(CheckIncludeFile)
 include(CheckSymbolExists)
 include(CheckFunctionExists)
 include(GenerateExportHeader)
+include(CMakeDependentOption)
 include(CTest)
 
 check_include_file(unistd.h HAVE_UNISTD_H)
 check_include_file(io.h HAVE_IO_H)
+check_include_file(syslog.h HAVE_SYSLOG_H)
 
 check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 
 check_function_exists(secure_getenv HAVE_SECURE_GETENV)
 check_function_exists(__secure_getenv HAVE___SECURE_GETENV)
+
+cmake_dependent_option(ENABLE_LOGGING "Enable system logging" ON "HAVE_SYSLOG_H" OFF)
 
 add_library(ABC
     src/abc/libabc.h
@@ -36,6 +40,7 @@ target_compile_definitions(ABC
     PRIVATE
         $<$<BOOL:${HAVE_UNISTD_H}>:HAVE_UNISTD_H>
         $<$<BOOL:${HAVE_IO_H}>:HAVE_IO_H>
+        $<$<BOOL:${HAVE_SYSLOG_H}>:HAVE_SYSLOG_H>
         $<$<BOOL:${HAVE_SECURE_GETENV}>:HAVE_SECURE_GETENV>
         $<$<BOOL:${HAVE_SECURE___GETENV}>:HAVE_SECURE___GETENV>
         $<$<BOOL:${_GNU_SOURCE}>:_GNU_SOURCE>

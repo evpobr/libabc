@@ -18,11 +18,26 @@
 #define _LIBABC_PRIVATE_H_
 
 #include <stdbool.h>
+#ifdef HAVE_SYSLOG_H
 #include <syslog.h>
+#else
+#define	LOG_EMERG   0 /* system is unusable */
+#define	LOG_ALERT   1 /* action must be taken immediately */
+#define	LOG_CRIT    2 /* critical conditions */
+#define	LOG_ERR     3 /* error conditions */
+#define	LOG_WARNING 4 /* warning conditions */
+#define	LOG_NOTICE	5 /* normal but significant condition */
+#define	LOG_INFO    6 /* informational */
+#define	LOG_DEBUG   7 /* debug-level messages */
+#endif
 
 #include <abc/libabc.h>
 
+#ifdef __GNUC__
 static inline void __attribute__((always_inline, format(printf, 2, 3)))
+#else
+static inline void
+#endif
 abc_log_null(struct abc_ctx *ctx, const char *format, ...) {}
 
 #define abc_log_cond(ctx, prio, arg...) \
