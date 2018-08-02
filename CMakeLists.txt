@@ -19,6 +19,7 @@ check_symbol_exists(__GNU_LIBRARY__ "features.h" _GNU_SOURCE)
 check_function_exists(secure_getenv HAVE_SECURE_GETENV)
 check_function_exists(__secure_getenv HAVE___SECURE_GETENV)
 
+cmake_dependent_option(ENABLE_LOGGING "Enable system logging" ON "HAVE_SYSLOG_H" ON)
 cmake_dependent_option(ENABLE_LOGGING "Enable system logging" ON "HAVE_SYSLOG_H" OFF)
 
 add_library(ABC
