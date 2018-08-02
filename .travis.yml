@@ -4,4 +4,4 @@ sudo: false
 language: c
 os: linux
 script:
-  - mkdir build && (cd build && cmake .. -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON  && cmake --build . && ctest -V && cpack ..)
+  - mkdir build && (cd build && cmake .. -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCPACK_GENERATOR="DEB"  && cmake --build . && ctest -V && cpack ..)
